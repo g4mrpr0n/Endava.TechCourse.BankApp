@@ -1,6 +1,6 @@
-using Endava.TechCourse.BankApp.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
 
 namespace Endava.TechCourse.BankApp.Client
 {
@@ -9,6 +9,8 @@ namespace Endava.TechCourse.BankApp.Client
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            builder.Services.AddMudServices();
+
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
