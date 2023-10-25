@@ -1,5 +1,4 @@
-﻿using Endava.TechCourse.BankApp.Domain.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Endava.TechCourse.BankApp.Infrastructure.Persistence
 {
@@ -9,8 +8,8 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Persistence
         {
         }
 
-        public DbSet<Wallet> Wallets { get; set; }
+        //public DbSet<Wallet> Wallets { get; set; }
 
-        public DbSet<Currency> Currencies { get; set; }
+        //public DbSet<Currency> Currencies { get; set; }
     }
 }
