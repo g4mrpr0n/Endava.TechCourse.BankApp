@@ -2,7 +2,8 @@
 
 namespace Endava.TechCourse.BankApp.Domain.Models
 {
-    internal class Report : BaseEntity
+    public class Report : BaseEntity
+
     {
         public List<Transaction> Transactions { get; set; }
         public decimal TotalAmount { get; set; }

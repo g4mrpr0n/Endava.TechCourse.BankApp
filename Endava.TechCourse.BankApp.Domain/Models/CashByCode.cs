@@ -2,7 +2,8 @@
 
 namespace Endava.TechCourse.BankApp.Domain.Models
 {
-    internal class CashByCode : BaseEntity
+    public class CashByCode : BaseEntity
+
     {
         public Wallet Wallet { get; set; }
         public Currency Currency { get; set; }
