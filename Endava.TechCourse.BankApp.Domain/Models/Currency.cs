@@ -3,6 +3,7 @@
 namespace Endava.TechCourse.BankApp.Domain.Models
 {
     public class Currency : BaseEntity
+
     {
         public string Name { get; set; }
 

@@ -3,6 +3,7 @@
 namespace Endava.TechCourse.BankApp.Domain.Models
 {
     public class CashByCode : BaseEntity
+
     {
         public Wallet Wallet { get; set; }
         public Currency Currency { get; set; }

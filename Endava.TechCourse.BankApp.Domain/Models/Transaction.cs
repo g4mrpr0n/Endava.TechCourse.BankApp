@@ -3,6 +3,7 @@
 namespace Endava.TechCourse.BankApp.Domain.Models
 {
     public class Transaction : BaseEntity
+
     {
         public decimal Amount { get; set; }
         public Currency Currency { get; set; }
