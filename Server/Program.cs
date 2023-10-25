@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using Endava.TechCourse.BankApp.Infrastructure;
 
 namespace Endava.TechCourse.BankApp
 {
@@ -7,8 +7,10 @@ namespace Endava.TechCourse.BankApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var configuration = builder.Configuration;
 
             // Add services to the container.
+            builder.Services.AddInfrastructure(configuration);
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
@@ -29,7 +31,6 @@ namespace Endava.TechCourse.BankApp
             app.UseStaticFiles();
 
             app.UseRouting();
-
 
             app.MapRazorPages();
             app.MapControllers();
