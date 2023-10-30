@@ -1,0 +1,31 @@
+﻿@page "/wallet"
+@using MudBlazor
+@inject HttpClient HttpClient
+
+<PageTitle>All wallets</PageTitle>
+
+<MudTable Items="@wallets">
+    <HeaderContent>
+        <MudTh>Type</MudTh>
+        <MudTh>Amount</MudTh>
+        <MudTh>Currency Name</MudTh>
+        <MudTh>Currency Code</MudTh>
+        <MudTh>Currency Change Rate</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.Type</MudTd>
+        <MudTd>@context.Amount</MudTd>
+        <MudTd>@context.Currency.Name</MudTd>
+        <MudTd>@context.Currency.CurrencyCode</MudTd>
+        <MudTd>@context.Currency.ChangeRate</MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    private List<Endava.TechCourse.BankApp.Domain.Models.Wallet> wallets;
+
+    protected override async Task OnInitializedAsync()
+    {
+        wallets = await HttpClient.GetFromJsonAsync<List<Endava.TechCourse.BankApp.Domain.Models.Wallet>>("http://localhost:5079/api/wallet/");
+    }
+}

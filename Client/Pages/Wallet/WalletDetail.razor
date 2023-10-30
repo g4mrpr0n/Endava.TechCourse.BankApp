@@ -1,0 +1,41 @@
+﻿@page "/wallet/{id}"
+@using MudBlazor
+@inject HttpClient HttpClient
+
+<PageTitle>Wallet Detail</PageTitle>
+
+<h3>Wallet Details</h3>
+
+@if (wallet != null)
+{
+    <div>
+        <p><strong>Type:</strong> @wallet.Type</p>
+        <p><strong>Amount:</strong> @wallet.Amount</p>
+        <p><strong>Currency Name:</strong> @wallet.Currency.Name</p>
+        <p><strong>Currency Code:</strong> @wallet.Currency.CurrencyCode</p>
+        <p><strong>Currency Change Rate:</strong> @wallet.Currency.ChangeRate</p>
+    </div>
+}
+else
+{
+    <p>Wallet not found.</p>
+}
+
+@code {
+    private Endava.TechCourse.BankApp.Domain.Models.Wallet wallet;
+
+    [Parameter]
+    public string Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!string.IsNullOrEmpty(Id))
+        {
+            Guid walletId;
+            if (Guid.TryParse(Id, out walletId))
+            {
+                wallet = await HttpClient.GetFromJsonAsync<Endava.TechCourse.BankApp.Domain.Models.Wallet>($"http://localhost:5079/api/wallet/{walletId}");
+            }
+        }
+    }
+}

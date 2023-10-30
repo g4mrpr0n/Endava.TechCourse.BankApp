@@ -1,0 +1,39 @@
+﻿@page "/wallet/create"
+@using Endava.TechCourse.BankApp.Shared
+<PageTitle>Create Wallet</PageTitle>
+
+<h3>Create a New Wallet</h3>
+
+<EditForm Model="@createWalletDto" OnValidSubmit="CreateWallet">
+    <DataAnnotationsValidator />
+    <MudTextField @bind-Value="@createWalletDto.Type" Label="Type" Required="true" />
+    <MudTextField @bind-Value="@createWalletDto.Amount" Label="Amount" Required="true" />
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" Type="submit">Create Wallet</MudButton>
+</EditForm>
+
+@code {
+    private CreateWalletDTO createWalletDto = new CreateWalletDTO();
+    private bool creationSuccessful = false;
+    private string errorMessage;
+
+    private async Task CreateWallets()
+    {
+        try
+        {
+            var response = await HttpClient.PostAsJsonAsync("http://localhost:5079/api/wallet", createWalletDto);
+
+            if (response.IsSuccessStatusCode)
+            {
+                creationSuccessful = true;
+            }
+            else
+            {
+                errorMessage = "Failed to create the wallet. Please try again.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "An error occurred: " + ex.Message;
+        }
+    }
+}
