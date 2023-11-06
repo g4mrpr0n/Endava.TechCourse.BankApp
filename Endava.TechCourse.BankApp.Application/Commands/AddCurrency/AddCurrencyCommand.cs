@@ -1,8 +1,8 @@
-﻿using Endava.TechCourse.BankApp.Domain.Common;
+﻿using MediatR;
 
-namespace Endava.TechCourse.BankApp.Domain.Models
+namespace Endava.TechCourse.BankApp.Application.Commands.AddCurrency
 {
-    public class Currency : BaseEntity
+    public class AddCurrencyCommand : IRequest<CommandStatus>
     {
         public string Name { get; set; }
         public string CurrencyCode { get; set; }
