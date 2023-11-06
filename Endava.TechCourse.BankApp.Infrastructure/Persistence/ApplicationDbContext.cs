@@ -23,6 +23,5 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Persistence
 
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }
