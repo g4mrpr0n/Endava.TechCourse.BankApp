@@ -11,8 +11,6 @@ namespace Endava.TechCourse.BankApp.Application.Queries.GetWallets
 
         public GetWalletsHandler(ApplicationDbContext context)
         {
-            ArgumentNullException.ThrowIfNull(context);
-
             this.context = context;
         }
 

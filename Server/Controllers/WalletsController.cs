@@ -1,9 +1,7 @@
-﻿using Endava.TechCourse.BankApp.Application.Queries.GetWallets;
-using Endava.TechCourse.BankApp.Domain.Models;
+﻿using Endava.TechCourse.BankApp.Domain.Models;
 using Endava.TechCourse.BankApp.Infrastructure.Persistence;
 using Endava.TechCourse.BankApp.Server.Common;
 using Endava.TechCourse.BankApp.Shared;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,24 +12,21 @@ namespace Endava.TechCourse.BankApp.Server.Controllers
     public class WalletsController : ControllerBase
     {
         private readonly ApplicationDbContext context;
-        private readonly IMediator mediator;
 
-        public WalletsController(ApplicationDbContext context, IMediator mediator)
+        public WalletsController(ApplicationDbContext context)
         {
             ArgumentNullException.ThrowIfNull(context);
-            ArgumentNullException.ThrowIfNull(mediator);
 
             this.context = context;
-            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<List<WalletDto>> GetWallets()
         {
-            var query = new GetWalletsQuery();
-            var wallets = await mediator.Send(query);
+            var wallets = await context.Wallets.Include(x => x.Currency).AsNoTracking().ToListAsync();
+            var dtos = Mapper.Map(wallets).ToList();
 
-            return Mapper.Map(wallets);
+            return dtos;
         }
 
         [HttpPost]

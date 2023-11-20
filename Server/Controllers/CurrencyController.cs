@@ -1,4 +1,7 @@
-﻿using Endava.TechCourse.BankApp.Application.Commands.AddCurrency;
+﻿using Endava.TechCourse.BankApp.Application.Commands.CreateWallet;
+using Endava.TechCourse.BankApp.Application.Queries.GetCurrencies;
+using Endava.TechCourse.BankApp.Application.Queries.GetCurrencyById;
+using Endava.TechCourse.BankApp.Domain.Models;
 using Endava.TechCourse.BankApp.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,29 +17,54 @@ namespace Endava.TechCourse.BankApp.Server.Controllers
         public CurrencyController(IMediator mediator)
         {
             ArgumentNullException.ThrowIfNull(mediator);
-
             this.mediator = mediator;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddCurrency([FromBody] CurrencyDto dto)
+        [HttpGet]
+        public async Task<List<CurrencyDto>> GetCurrencyes()
         {
-            var command = new AddCurrencyCommand()
-            {
-                Name = dto.Name,
-                CurrencyCode = dto.CurrencyCode,
-                ChangeRate = dto.ChangeRate
-            };
+            var currencyesRes = new List<CurrencyDto>();
 
+            var query = new GetCurrenciesQuery();
+            var result = await mediator.Send(query);
+            foreach (var c in result)
+            {
+                currencyesRes.Add(new CurrencyDto
+                {
+                    CurrencyCode = c.CurrencyCode,
+                    ChangeRate = c.ChangeRate,
+                    Name = c.Name,
+                    Id = c.Id.ToString(),
+                    CanBeRemoved = true
+                }
+                );
+            }
+            return currencyesRes;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCurrency([FromBody] CurrencyDto currencyDTO)
+        {
+            var command = new CreateWalletCommand
+            {
+                Name = currencyDTO.Name,
+                CurrencyCode = currencyDTO.CurrencyCode,
+                ChangeRate = currencyDTO.ChangeRate
+            };
             var result = await mediator.Send(command);
 
             return result.IsSuccessful ? Ok() : BadRequest(result.Error);
         }
 
         [HttpGet]
-        public async Task<List<CurrencyDto>> GetCurrencies()
+        [Route("{id}")]
+        public async Task<Currency> GetCurrencyById(Guid id)
         {
-            return new();
+            GetCurrencyByIdQuery request = new GetCurrencyByIdQuery
+            {
+                Id = id
+            };
+            return await mediator.Send(request);
         }
     }
 }
