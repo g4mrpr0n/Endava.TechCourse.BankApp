@@ -11,26 +11,27 @@ namespace Endava.TechCourse.BankApp.Application.Commands.CreateWallet
 
         public CreateWalletHandler(ApplicationDbContext context)
         {
+            ArgumentNullException.ThrowIfNull(context);
+
             this.context = context;
         }
 
         public async Task<CommandStatus> Handle(CreateWalletCommand request, CancellationToken cancellationToken)
         {
-            Currency currency = await context.Currencies.FirstOrDefaultAsync(c => c.CurrencyCode == request.CurrencyCode);
-            var wallet = new Wallet
+            var currency = await context.Currencies.FirstOrDefaultAsync(x => x.CurrencyCode == request.Currency, cancellationToken);
+
+            if (currency is null)
+                return CommandStatus.Failed("Valuta pentru acest portofel nu exista");
+
+            var newWallet = new Wallet()
             {
-                Type = request.Type,
-                Amount = request.Amount,
-                Currency = new Currency
-                {
-                    ChangeRate = currency.ChangeRate,
-                    CurrencyCode = currency.CurrencyCode,
-                    Name = currency.Name
-                }
+                Currency = request.Currency,
+                ChangeRate = currency.ChangeRate
             };
 
-            await context.Wallets.AddAsync(wallet);
-            context.SaveChanges();
+            await context.Wallets.AddAsync(newWallet, cancellationToken);
+            await context.SaveChangesAsync(cancellationToken);
+
             return new CommandStatus();
         }
     }

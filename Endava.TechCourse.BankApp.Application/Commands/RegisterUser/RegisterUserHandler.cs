@@ -25,6 +25,7 @@ namespace Endava.TechCource.BankApp.Application.Commands.RegisterUser
 
         public async Task<CommandStatus> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
+            var anyUser = await context.Users.AnyAsync(cancellationToken);
             var userExists = await context.Users.AnyAsync(user => user.Email == request.Email, cancellationToken);
 
             if (userExists)
@@ -43,7 +44,7 @@ namespace Endava.TechCource.BankApp.Application.Commands.RegisterUser
 
             IdentityResult roleResult;
 
-            if (await context.Users.AnyAsync(cancellationToken))
+            if (anyUser)
                 roleResult = await userManager.AddToRoleAsync(user, UserRole.User.ToString());
             else
                 roleResult = await userManager.AddToRoleAsync(user, UserRole.Admin.ToString());

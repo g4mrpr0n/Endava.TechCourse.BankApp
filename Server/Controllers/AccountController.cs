@@ -2,33 +2,33 @@
 using Endava.TechCourse.BankApp.Application.Commands.RegisterUser;
 using Endava.TechCourse.BankApp.Application.Queries.GetUserDetails;
 using Endava.TechCourse.BankApp.Server.Common;
-using Endava.TechCourse.BankApp.Server.Common.JWToken;
+using Endava.TechCourse.BankApp.Server.Common.JwtToken;
 using Endava.TechCourse.BankApp.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Endava.TechCourse.BankApp.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IMediator mediator;
         private readonly JwtService jwtService;
+        private readonly IMediator mediator;
 
-        public AccountController(IMediator mediator, JwtService jwtService)
+        public AccountController(JwtService jwtService, IMediator mediator)
         {
+            ArgumentNullException.ThrowIfNull(jwtService);
             ArgumentNullException.ThrowIfNull(mediator);
 
-            this.mediator = mediator;
             this.jwtService = jwtService;
+            this.mediator = mediator;
         }
 
-        [HttpPost]
-        [Route("register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto dto)
         {
-            var registerUserCommand = new RegisterUserCommand()
+            var registerUseCommand = new RegisterUserCommand()
             {
                 Username = dto.Username,
                 FirstName = dto.FirstName,
@@ -36,7 +36,9 @@ namespace Endava.TechCourse.BankApp.Server.Controllers
                 Password = dto.Password,
                 Email = dto.Email
             };
-            var result = await mediator.Send(registerUserCommand);
+
+            var result = await mediator.Send(registerUseCommand);
+
             return result.IsSuccessful ? Ok() : BadRequest(new { result.Error });
         }
 

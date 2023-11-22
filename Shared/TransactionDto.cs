@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Endava.TechCourse.BankApp.Shared
+﻿namespace Endava.TechCourse.BankApp.Shared
 {
     public class TransactionDto
     {

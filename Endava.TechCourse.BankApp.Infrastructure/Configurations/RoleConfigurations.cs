@@ -5,18 +5,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Endava.TechCourse.BankApp.Infrastructure.Configurations
 {
-    public class RoleConfigurations : IEntityTypeConfiguration<IdentityRole<Guid>>
+    public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole<Guid>>
     {
         public void Configure(EntityTypeBuilder<IdentityRole<Guid>> builder)
         {
             var roles = Enum.GetNames(typeof(UserRole))
-                    .Select(role => new IdentityRole<Guid>(role)
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = role,
-                        NormalizedName = role.Normalize(),
-                    })
+                .Select(role => new IdentityRole<Guid>() { Id = Guid.NewGuid(), Name = role, NormalizedName = role.Normalize() })
                 .ToList();
+
             builder.HasData(roles);
         }
     }

@@ -28,6 +28,9 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("CanBeRemoved")
+                        .HasColumnType("bit");
+
                     b.Property<decimal>("ChangeRate")
                         .HasColumnType("decimal(18,2)");
 
@@ -40,6 +43,42 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Currencies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5cf3c85c-bd36-430c-ae1c-de60cfac1d74"),
+                            CanBeRemoved = false,
+                            ChangeRate = 1m,
+                            CurrencyCode = "MDL",
+                            Name = "Leu Moldovenesc"
+                        });
+                });
+
+            modelBuilder.Entity("Endava.TechCourse.BankApp.Domain.Models.Transaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Currency")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("DestinationWalletId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SourceWalletId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("TransactionTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("Endava.TechCourse.BankApp.Domain.Models.User", b =>
@@ -123,15 +162,16 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("CurrencyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<decimal>("ChangeRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Currency")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CurrencyId");
 
                     b.ToTable("Wallets");
                 });
@@ -166,13 +206,13 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dec41ecb-814d-454a-b7d4-7b5bd6a40fc9"),
+                            Id = new Guid("846e92fa-c017-42d2-981e-1b499f2cd0af"),
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
-                            Id = new Guid("11b41273-57e2-4b5d-aebe-7c24f476d8e6"),
+                            Id = new Guid("0475be96-6e21-497f-b9da-64ff2585fca5"),
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -281,17 +321,6 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Endava.TechCourse.BankApp.Domain.Models.Wallet", b =>
-                {
-                    b.HasOne("Endava.TechCourse.BankApp.Domain.Models.Currency", "Currency")
-                        .WithMany("Wallets")
-                        .HasForeignKey("CurrencyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Currency");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
@@ -341,11 +370,6 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Endava.TechCourse.BankApp.Domain.Models.Currency", b =>
-                {
-                    b.Navigation("Wallets");
                 });
 #pragma warning restore 612, 618
         }
