@@ -1,4 +1,5 @@
 ﻿using Endava.TechCourse.BankApp.Domain.Common;
+using Endava.TechCourse.BankApp.Shared.Enums;
 
 namespace Endava.TechCourse.BankApp.Domain.Models
 {
@@ -11,5 +12,9 @@ namespace Endava.TechCourse.BankApp.Domain.Models
         public string Currency { get; set; }
 
         public decimal ChangeRate { get; set; }
+
+        public WalletType WalletType { get; set; }
+
+        public string WalletCode { get; set; }
     }
 }

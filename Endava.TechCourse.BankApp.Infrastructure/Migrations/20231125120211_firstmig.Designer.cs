@@ -4,6 +4,7 @@ using Endava.TechCourse.BankApp.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231125120211_firstmig")]
+    partial class firstmig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +50,7 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6e1404cd-461b-47a8-95ce-3d517b0c68f1"),
+                            Id = new Guid("fd713fc8-3739-49af-add9-cf96f49fdd87"),
                             CanBeRemoved = false,
                             ChangeRate = 1m,
                             CurrencyCode = "MDL",
@@ -171,9 +174,6 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("WalletType")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Wallets");
@@ -209,13 +209,13 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("874cbd40-2e43-4584-90e3-3f47d427e6cb"),
+                            Id = new Guid("e6ed386f-4a9d-4bc1-af44-e01d1dcc7f15"),
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
-                            Id = new Guid("5cc7b2ac-6ed4-44ad-887c-4504c34d36e3"),
+                            Id = new Guid("170f25fa-5f43-406b-80be-9172717f792d"),
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });

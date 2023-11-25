@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class TestMigration : Migration
+    public partial class firstmig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -211,14 +211,14 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("0475be96-6e21-497f-b9da-64ff2585fca5"), null, "Admin", "Admin" },
-                    { new Guid("846e92fa-c017-42d2-981e-1b499f2cd0af"), null, "User", "User" }
+                    { new Guid("170f25fa-5f43-406b-80be-9172717f792d"), null, "Admin", "Admin" },
+                    { new Guid("e6ed386f-4a9d-4bc1-af44-e01d1dcc7f15"), null, "User", "User" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Currencies",
                 columns: new[] { "Id", "CanBeRemoved", "ChangeRate", "CurrencyCode", "Name" },
-                values: new object[] { new Guid("5cf3c85c-bd36-430c-ae1c-de60cfac1d74"), false, 1m, "MDL", "Leu Moldovenesc" });
+                values: new object[] { new Guid("fd713fc8-3739-49af-add9-cf96f49fdd87"), false, 1m, "MDL", "Leu Moldovenesc" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

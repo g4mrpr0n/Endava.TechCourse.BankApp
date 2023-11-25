@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231122151713_TestMigration")]
-    partial class TestMigration
+    [Migration("20231125134818_wallettype")]
+    partial class wallettype
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,7 +50,7 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5cf3c85c-bd36-430c-ae1c-de60cfac1d74"),
+                            Id = new Guid("6e1404cd-461b-47a8-95ce-3d517b0c68f1"),
                             CanBeRemoved = false,
                             ChangeRate = 1m,
                             CurrencyCode = "MDL",
@@ -174,6 +174,9 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("WalletType")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Wallets");
@@ -209,13 +212,13 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("846e92fa-c017-42d2-981e-1b499f2cd0af"),
+                            Id = new Guid("874cbd40-2e43-4584-90e3-3f47d427e6cb"),
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
-                            Id = new Guid("0475be96-6e21-497f-b9da-64ff2585fca5"),
+                            Id = new Guid("5cc7b2ac-6ed4-44ad-887c-4504c34d36e3"),
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });

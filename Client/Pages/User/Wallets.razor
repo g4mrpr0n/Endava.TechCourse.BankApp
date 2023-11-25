@@ -1,6 +1,7 @@
 ﻿@page "/wallets"
 @layout MainLayout
 @inject HttpClient httpClient
+@using Endava.TechCourse.BankApp.Shared.Enums
 
 <PageTitle>Endava .NET Tech Course</PageTitle>
 
@@ -32,6 +33,8 @@
                         <MudCardContent>
                             <MudText>Balanta contului : @wallet.Amount</MudText>
                             <MudText>Valuta - @wallet.Currency</MudText>
+                            <MudText>Wallet Type - @((WalletType)wallet.WalletType)</MudText>
+                            <MudText>Wallet Code - @wallet.WalletCode </MudText>
                         </MudCardContent>
                     </MudCard>
                 </MudItem>
