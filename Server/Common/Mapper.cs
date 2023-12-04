@@ -40,7 +40,6 @@ namespace Endava.TechCourse.BankApp.Server.Common
                     ChangeRate = wallet.ChangeRate,
                     Amount = wallet.Amount,
                     WalletType = (int)wallet.WalletType,
-                    WalletCode = wallet.WalletCode
                 };
 
                 dtos.Add(dto);

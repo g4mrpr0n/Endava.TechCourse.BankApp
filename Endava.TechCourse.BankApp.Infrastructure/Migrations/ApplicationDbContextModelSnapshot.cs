@@ -47,7 +47,7 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6e1404cd-461b-47a8-95ce-3d517b0c68f1"),
+                            Id = new Guid("8ed1f5f5-e247-4997-a5e8-daccbf3025b3"),
                             CanBeRemoved = false,
                             ChangeRate = 1m,
                             CurrencyCode = "MDL",
@@ -209,13 +209,13 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("874cbd40-2e43-4584-90e3-3f47d427e6cb"),
+                            Id = new Guid("95c28c96-667d-462a-a682-108a4119e56d"),
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
-                            Id = new Guid("5cc7b2ac-6ed4-44ad-887c-4504c34d36e3"),
+                            Id = new Guid("fec0d5a9-c197-4015-bb20-5924dff3624d"),
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });

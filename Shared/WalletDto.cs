@@ -8,6 +8,5 @@
         public string Currency { get; set; }
         public decimal ChangeRate { get; set; }
         public int WalletType { get; set; }
-        public string WalletCode { get; set; }
     }
 }

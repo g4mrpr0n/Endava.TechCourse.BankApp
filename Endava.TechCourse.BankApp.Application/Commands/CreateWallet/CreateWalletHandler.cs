@@ -29,7 +29,6 @@ namespace Endava.TechCourse.BankApp.Application.Commands.CreateWallet
                 Currency = request.Currency,
                 ChangeRate = currency.ChangeRate,
                 WalletType = (WalletType)new Random().Next(0, 4),
-                WalletCode = GenerateUniqueDigitsFromGuid()
             };
 
             await context.Wallets.AddAsync(newWallet, cancellationToken);
@@ -38,6 +37,7 @@ namespace Endava.TechCourse.BankApp.Application.Commands.CreateWallet
             return new CommandStatus();
         }
 
+        /*
         private string GenerateUniqueDigitsFromGuid()
         {
             Guid guid = Guid.NewGuid();
@@ -50,5 +50,6 @@ namespace Endava.TechCourse.BankApp.Application.Commands.CreateWallet
 
             return uniqueDigits;
         }
+        */
     }
 }

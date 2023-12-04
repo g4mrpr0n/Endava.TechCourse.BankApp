@@ -14,7 +14,5 @@ namespace Endava.TechCourse.BankApp.Domain.Models
         public decimal ChangeRate { get; set; }
 
         public WalletType WalletType { get; set; }
-
-        public string WalletCode { get; set; }
     }
 }
