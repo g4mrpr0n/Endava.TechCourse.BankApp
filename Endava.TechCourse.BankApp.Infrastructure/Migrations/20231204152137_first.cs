@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class firstmig : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -93,7 +93,8 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Currency = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ChangeRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    ChangeRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    WalletType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -211,14 +212,14 @@ namespace Endava.TechCourse.BankApp.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("170f25fa-5f43-406b-80be-9172717f792d"), null, "Admin", "Admin" },
-                    { new Guid("e6ed386f-4a9d-4bc1-af44-e01d1dcc7f15"), null, "User", "User" }
+                    { new Guid("95c28c96-667d-462a-a682-108a4119e56d"), null, "User", "User" },
+                    { new Guid("fec0d5a9-c197-4015-bb20-5924dff3624d"), null, "Admin", "Admin" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Currencies",
                 columns: new[] { "Id", "CanBeRemoved", "ChangeRate", "CurrencyCode", "Name" },
-                values: new object[] { new Guid("fd713fc8-3739-49af-add9-cf96f49fdd87"), false, 1m, "MDL", "Leu Moldovenesc" });
+                values: new object[] { new Guid("8ed1f5f5-e247-4997-a5e8-daccbf3025b3"), false, 1m, "MDL", "Leu Moldovenesc" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
